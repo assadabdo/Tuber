@@ -7,7 +7,7 @@ exports.handler = async (event) => {
   const options = {
     params: {
       maxResults: 20,
-      key: "AIzaSyBS7jnWgHnZmz1-CyhPco9CoTmqtxvImXE",
+      key: process.env.YOUTUBE_API_KEY,
     },
   };
 

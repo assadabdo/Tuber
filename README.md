@@ -4,7 +4,11 @@ Tuber is a React app that lets you browse YouTube content by categories, watch v
 
 It uses **Netlify Functions** as a lightweight backend/proxy to call the **YouTube Data API v3**.
 
-> Note: The Netlify functions in this repo currently include a YouTube API key directly in code.
+---
+
+## Live Demo
+
+You can view the deployed app here: https://tubery.netlify.app/
 
 ---
 
@@ -75,7 +79,24 @@ npm run build
 
 ---
 
-## YouTube API Notes
+## YouTube API / Environment Variable (IMPORTANT)
+
+All Netlify functions in this repo read the YouTube Data API key from the environment variable:
+
+- `process.env.REACT_APP_YOUTUBE_API_KEY`
+
+### Netlify configuration
+
+1. Open your site on Netlify
+2. Go to **Site settings → Environment variables**
+3. Add:
+   - `REACT_APP_YOUTUBE_API_KEY` = `<your-youtube-api-key>`
+
+> Do not hardcode the API key in source files.
+
+---
+
+## YouTube API Endpoints Used
 
 The functions call endpoints such as:
 
@@ -84,24 +105,5 @@ The functions call endpoints such as:
 - Videos: `https://www.googleapis.com/youtube/v3/videos`
 - Playlists: `https://www.googleapis.com/youtube/v3/playlists`
 - Playlist items: `https://www.googleapis.com/youtube/v3/playlistItems`
-
-### Store the YouTube API key securely (recommended)
-
-This repo currently uses a YouTube API key inside the Netlify function code. A safer approach is to store the key in an environment variable and have the functions read it.
-
-**Netlify (recommended):**
-
-1. Open your site on Netlify
-2. Go to **Site settings → Environment variables**
-3. Add:
-   - `REACT_APP_YOUTUBE_API_KEY` = `<your-youtube-api-key>`
-
-Then update the code in `netlify/functions/*.js` to use:
-
-```js
-key: process.env.REACT_APP_YOUTUBE_API_KEY;
-```
-
-> If you keep the current hardcoded key, everything will still work, but exposing API keys in source code is not recommended.
 
 ---
